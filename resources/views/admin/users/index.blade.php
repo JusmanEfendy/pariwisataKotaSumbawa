@@ -11,44 +11,47 @@
 				<i class="fas fa-plus"></i>
 			</a>
 		</x-slot>
-		<table class="table table-bordered">
-			<thead>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Role</th>
-				<th>Action</th>
-			</thead>
-			<tbody>
-				@forelse($users as $user)
-				<tr>
-					<td>{{ $user->name }}</td>
-					<td>{{ $user->email }}</td>
-					<td>
-					@if(!empty($user->getRoleNames()))
-				        @foreach($user->getRoleNames() as $v)
-				           <label class="badge badge-success">{{ $v }}</label>
-				        @endforeach
-				      @endif
-					</td>
-					<td class="text-center">
-						<button type="button" class="btn btn-info mr-1 info"
-						data-name="{{ $user->name }}" data-email="{{ $user->email }}" data-roles="{{ $user->getRoleNames() }}" data-created="{{ $user->created_at->format('d-M-Y H:m:s') }}">
-							<i class="fas fa-eye"></i>
-						</button>
-						<a href="{{ route('admin.member.edit', $user->id) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
-						<form action="{{ route('admin.member.delete', $user->id) }}" style="display: inline-block;" method="POST">
-							@csrf
-							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
-						</form>
-					</td>
-				</tr>
-				@empty
-				<tr>
-					<td colspan="3" class="text-center">No Member</td>
-				</tr>
-				@endforelse
-			</tbody>
-		</table>
+		<div class="table-responsive">
+			<table class="table align-items-center table-flush" id="dataTable">
+				<thead>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Role</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					@forelse($users as $user)
+					<tr>
+						<td>{{ $user->name }}</td>
+						<td>{{ $user->email }}</td>
+						<td>
+						@if(!empty($user->getRoleNames()))
+							@foreach($user->getRoleNames() as $v)
+							   <label class="badge badge-success">{{ $v }}</label>
+							@endforeach
+						  @endif
+						</td>
+						<td class="text-center">
+							<button type="button" class="btn btn-info mr-1 info"
+							data-name="{{ $user->name }}" data-email="{{ $user->email }}" data-roles="{{ $user->getRoleNames() }}" data-created="{{ $user->created_at->format('d-M-Y H:m:s') }}">
+								<i class="fas fa-eye"></i>
+							</button>
+							<a href="{{ route('admin.member.edit', $user->id) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
+							<form action="{{ route('admin.member.delete', $user->id) }}" style="display: inline-block;" method="POST">
+								@csrf
+								<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
+							</form>
+						</td>
+					</tr>
+					@empty
+					<tr>
+						<td colspan="3" class="text-center">No Member</td>
+					</tr>
+					@endforelse
+				</tbody>
+			</table>
+		</div>
+		
 	</x-card>
 
 	<x-modal>

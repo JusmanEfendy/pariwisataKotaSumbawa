@@ -11,32 +11,35 @@
 				<i class="fas fa-plus"></i>
 			</a>
 		</x-slot>
-		<table class="table table-bordered">
-			<thead>
-				<th>ID</th>
-				<th>Role Name</th>
-				<th>Action</th>
-			</thead>
-			<tbody>
-				@forelse($roles as $role)
-				<tr>
-					<td>{{ $role->id }}</td>
-					<td>{{ $role->name }}</td>
-					<td class="text-center">
-						<a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
-						<form action="{{ route('admin.roles.delete', $role->id) }}" style="display: inline-block;" method="POST">
-							@csrf
-							<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
-						</form>
-					</td>
-				</tr>
-				@empty
-				<tr>
-					<td colspan="3" class="text-center">No Member</td>
-				</tr>
-				@endforelse
-			</tbody>
-		</table>
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<th>ID</th>
+					<th>Role Name</th>
+					<th>Action</th>
+				</thead>
+				<tbody>
+					@forelse($roles as $role)
+					<tr>
+						<td>{{ $role->id }}</td>
+						<td>{{ $role->name }}</td>
+						<td class="text-center">
+							<a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-primary mr-1"><i class="fas fa-edit"></i></a> 
+							<form action="{{ route('admin.roles.delete', $role->id) }}" style="display: inline-block;" method="POST">
+								@csrf
+								<button type="button" class="btn btn-danger delete"><i class="fas fa-trash"></i></button>
+							</form>
+						</td>
+					</tr>
+					@empty
+					<tr>
+						<td colspan="3" class="text-center">No Member</td>
+					</tr>
+					@endforelse
+				</tbody>
+			</table>
+		</div>
+		
 	</x-card>
 
 	<x-slot name="script">
