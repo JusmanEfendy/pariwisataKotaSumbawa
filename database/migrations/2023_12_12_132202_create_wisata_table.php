@@ -18,7 +18,7 @@ class CreateWisataTable extends Migration
             $table->string('NamaWisata');
             $table->string('KodeKategori');
             $table->text('LokasiWisata');
-            $table->text('Fasilitas')->nullable();
+            $table->string('KodeFasilitas')->nullable();
             $table->text('Deskripsi')->nullable();
             $table->string('Image')->nullable();
             $table->string('Lat');
@@ -26,6 +26,7 @@ class CreateWisataTable extends Migration
             $table->timestamps();
 
             $table->foreign('KodeKategori')->references('KodeKategori')->on('kategori');
+            $table->foreign('KodeFasilitas')->references('KodeFasilitas')->on('fasilitas');
         });
     }
 
